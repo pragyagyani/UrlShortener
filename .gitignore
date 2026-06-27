@@ -1,0 +1,28 @@
+# Build results
+bin/
+obj/
+out/
+publish/
+
+# .NET
+*.user
+*.suo
+*.userprefs
+project.lock.json
+artifacts/
+
+# Rider / VS / VS Code
+.idea/
+.vs/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment / secrets
+*.env
+appsettings.*.local.json
