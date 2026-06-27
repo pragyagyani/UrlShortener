@@ -1,0 +1,31 @@
+name: urlshortener
+region: nyc
+services:
+  - name: api
+    dockerfile_path: Dockerfile
+    source_dir: /
+    github:
+      repo: pragyagyani/UrlShortener
+      branch: main
+      deploy_on_push: true
+    http_port: 8080
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    health_check:
+      http_path: /health
+    routes:
+      - path: /
+    envs:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ConnectionStrings__Postgres
+        scope: RUN_TIME
+        type: SECRET
+        value: "Host=REPLACE_HOST;Port=25060;Database=defaultdb;Username=doadmin;Password=REPLACE_PASSWORD;SSL Mode=Require;Trust Server Certificate=true"
+      - key: ConnectionStrings__Redis
+        scope: RUN_TIME
+        type: SECRET
+        value: "REPLACE_HOST:25061,password=REPLACE_PASSWORD,ssl=true"
+      - key: ShortUrl__BaseUrl
+        scope: RUN_TIME
+        value: "https://REPLACE_WITH_APP_URL.ondigitalocean.app"
